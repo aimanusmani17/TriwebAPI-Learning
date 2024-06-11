@@ -1,0 +1,70 @@
+.main{
+    background-color: black;
+    margin: auto;
+    width: 400px;
+}
+
+.user_div{
+    width: 50%;
+    height: 200px;
+
+}
+
+.one{
+    background-color: brown;
+    float: left;
+}
+
+.two{
+    background-color: blue;
+    display: inline-block;
+
+}
+
+.three{
+    background-color: yellow;
+    float:  left;
+}
+
+.four{
+    background-color: green;
+    display: inline-block;
+
+}
+
+.user_block{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.btn_pro{
+    background-color: violet;
+    color: bisque;
+    border: 2px solid red;
+    height: 50px;
+    width: 150px;
+    margin: 10px 10px 10px 10px;
+
+}
+
+.input_pro{
+    background-color: white;
+    color: black;
+    border: 2px solid red;
+    height: 50px;
+    width: 150px;
+    margin: 20px 10px 0px 80px;
+
+}
+
+.my_user{
+    color: wheat;
+    width: 30px;
+    height: 40px;
+    font-size: larger;
+    font-weight: bold;
+    border: 3px dotted whitesmoke;
+}
