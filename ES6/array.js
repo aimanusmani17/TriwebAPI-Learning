@@ -24,3 +24,25 @@ console.log(keys);
 for (e of keys){
     console.log(arr[e]);
 }
+
+// Array .find()
+
+let arr2= [12,13,14,15];
+
+let firstOddNum=arr2.find(getOdd);
+
+function getOdd(value,index,ar){
+    return value % 2 !==0;
+}
+
+console.log(firstOddNum);
+
+
+// Array Find index()
+
+let arr4=[23,22,12,45,21];
+
+let indexOfFirstOdd= arr4.findIndex((value,index,ar)=>{
+    return value % 2!==0;
+})
+console.log(indexOfFirstOdd)
