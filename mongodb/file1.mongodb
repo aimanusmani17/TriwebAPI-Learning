@@ -1,0 +1,56 @@
+use shop // created database
+
+show dbs //shows all the DB
+
+db.shop.insertOne(
+    {item: "Biscuits", qty: 10, name: "Marigold"}
+) // inserted one record at once
+
+
+
+
+db.shop.insertMany([
+    { item: "pen", qty: 25, color: "black" } ,
+    { item: "pencilbox", qty: 85, color: "gray" } ,
+    { item: "file", qty: 30, color: "blue" }
+]) // inserted many records at once
+
+db.shop.find( {} ) // fetch all records from shop database
+
+db.shop.find( { qty: {$lt : 30 } } ) // less than
+
+db.shop.find( { item: "pencilbox", qty: {$lt : 30 } } ) // and
+
+db.shop.updateOne(
+    { item: "paper" },
+    { $set: { status: "P" } }
+)
+
+db.inventory.updateMany(
+    { qty: "25" },
+    { $set: { status: "P" } }
+)
+
+db.shop.deleteOne({qty: 16})
+
+//db.shop.deleteMany({}) //it will delete all records from shop database
+
+db.shop.find().limit(1)// it will show 1st record from shop database
+
+db.shop.find().skip(2)// it will skip first 2 records and show other records from shop database
+
+db.shop.find().sort({qty: 1})// it will sort the shop database according to the quantity in ascending order
+
+db.shop.find().sort({qty: -1})// it will sort the shop database according to the quantity in descending order
+
+db.products.insertMany([{title:"my product5",pname:"product005",owner:ObjectId('66715ce2b6d5c22dde90defe'),comments:"Good"},
+{ title:"my product6",pname:"product006",owner:ObjectId('66715ce2b6d5c22dde90defe') ,comments:"very Good"},
+{title:"my product7",pname:"product007",owner:ObjectId('66715ce2b6d5c22dde90defe') ,comments:"Good"}]);  //insert items into product database
+
+
+db.books.insertMany([{bname:"Habit to change",price:"500"},{bname:"ikikagai",price:"400"},{bname:"i saw you",price:"200"}]);
+
+
+//aggregate:
+
+db.shop.aggregate([{$lookup:{from:"books",localField:"favBooks" ,foreignFiled:"_id", as:"favBookData"}}]);
