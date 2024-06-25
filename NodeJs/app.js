@@ -1,9 +1,14 @@
 const express = require('express');
-
+const calculatorRouter= require('./router/calculator');
 const app= express();
 
-app.get('/', (req,res)=> {
-    res.send("I am the response");
-});
+app.use(express.json());
 
-app.listen(3000);
+// app.get('/', (req,res)=> {
+//     res.send("I am the response");
+// });
+
+
+
+app.use('/calculator', calculatorRouter);
+app.listen(3001);
