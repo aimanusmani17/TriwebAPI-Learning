@@ -14,6 +14,7 @@ class BankAccount{
 
     deposit(amount){
         this.balance += amount;
+        // Number(this.balance) += Number(amount);
         this.showAccDetails();
 
     }
@@ -30,5 +31,5 @@ class BankAccount{
     }
 }
 
-     let myBankAcc= new BankAccount("3456", "Akshi", "5000");
+     let myBankAcc= new BankAccount("3456", "Akshi", 5000);
      myBankAcc.deposit(1000);
