@@ -48,4 +48,24 @@ const checkTypesAndInterface= (req:Request,res:Response)=>{
 
 
 }
+
+class Employee{
+    ename:String ;
+    salary: Number;
+    constructor(name:String, salary: Number){
+        this.ename=name;
+        this.salary=salary;
+    }
+}
+
+    class EmployeeWithAge extends Employee{
+        age: Number=0;
+    }
+
+const relatedToClass= ( req:Request, res:Response)=>{
+    const john= new EmployeeWithAge("john", 300000);
+    john.salary= 40000;
+    john.age=32;
+}
+
 export {registerUSer, checkTypesAndInterface};
