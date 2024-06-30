@@ -15,7 +15,6 @@ const registerUSer = (req, res) => {
 exports.registerUSer = registerUSer;
 const checkTypesAndInterface = (req, res) => {
     let num = { x: 2, y: 4 };
-    num.x = 3;
     let xState = "locked";
     const myUSer = {
         id: 1,
