@@ -14,3 +14,7 @@ let weakMApExample={
 }
 
 console.log(weakMApExample);
+
+// A weak map  accepts only objects as keys 
+// Map accepts premetive datatypes as keys
+// 
