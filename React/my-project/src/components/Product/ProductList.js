@@ -1,9 +1,17 @@
+import Styles from './ProductList.module.css';
+import ProductItem from "./ProductItem";
 
+function ProductList(props){
+    return <ul className={Styles.list}>
 
-function ProductList(){
-    return <div>
+    {props.products.map((item) => {
+        // return <li key={item.id}>{item.product_name}</li>;
+        return <ProductItem key={item.key} item={item} />
+      })}
 
-    </div>
+       
+
+</ul>
 }
 
 export default ProductList;
