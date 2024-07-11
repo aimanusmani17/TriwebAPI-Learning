@@ -6,14 +6,14 @@ function Product() {
       id: "p1",
       image: "https://img.freepik.com/premium-photo/illustration-famous-monument-world_117023-16.jpg",
       product_name: "Country tour",
-      description: " World tour",
+      description: " Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
       price: "10000000",
     },
     {
       id: "p2",
       image: " https://www.shutterstock.com/image-photo/tourists-enjoying-views-new-york-600nw-1399814936.jpg",
       product_name: "City tour",
-      description: " famous five city tour",
+      description: " Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
       price: "5000000",
     }
   ];
