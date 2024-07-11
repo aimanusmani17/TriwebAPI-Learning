@@ -9,6 +9,7 @@ function MainMenu(){
             <ul><Link to="/">Home</Link></ul>
             <ul> <Link to="/About">About</Link></ul>
             <ul> <Link to="/Contact">Contact</Link></ul>
+            <ul> <Link to="/Product">Product</Link></ul>
             
         </nav>
         
