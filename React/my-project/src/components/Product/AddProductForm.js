@@ -25,6 +25,7 @@ function submitHandler(event){
     description ,
   }
   props.addProductHandler(product);
+  console.log(product);
 }
 
 

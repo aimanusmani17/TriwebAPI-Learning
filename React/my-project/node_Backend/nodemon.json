@@ -1,0 +1,6 @@
+{
+    "env":{
+        "connectionString": "mongodb+srv://myuser:abcd@mycluster.twqc0pp.mongodb.net/reactDemo?retryWrites=true&w=majority&appName=mycluster",
+        "port":3002
+    }
+}
