@@ -29,3 +29,25 @@ img{
 }
 
 
+.heartfvrt {
+    display:inline-block;
+    width: 35px;
+    aspect-ratio: 1;
+    border-image: radial-gradient(red 60%,#0000 70%) 84.5% fill/100%;
+    clip-path: polygon(-41% 0,50% 91%, 141% 0);
+    background-color: transparent;
+    margin-left: 95%;
+
+}
+
+.heartUnfvrt {
+    display:inline-block;
+    width: 35px;
+    aspect-ratio: 1;
+    border-image: radial-gradient(rgb(14,0,0) 60%, rgba(1,0,0,0) 70%) 84.5% fill/100%;
+    clip-path: polygon(-41% 0,50% 91%, 140% 0);
+    background-color: transparent;
+    margin-left: 95%;
+
+}
+

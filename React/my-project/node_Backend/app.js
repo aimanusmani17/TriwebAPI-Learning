@@ -22,7 +22,20 @@ app.post("/product", async (req, res) => {
   }
 });
 
+app.get('/product', async (req, res) => {
+  try {
+    console.log("Product Fetching")
+    const products = await Product.find({});
+    res.send({ status: "success" ,data:products});
+  } catch (error) {
+    console.log(error.message);
+    res.send({ status: "error", message: error.message });
+  }
+});
+
 mongoose.connect(process.env.connectionString).then(() => {
   app.listen(process.env.port);
   console.log("Server connected");
 });
+
+
