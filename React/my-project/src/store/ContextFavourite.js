@@ -41,7 +41,7 @@ export function ContextFavourite(props){
 
     
     const context ={
-        favouriteItems:userFavourite,
+        favouriteItem:userFavourite,
         addFavouriteItem:addFavouriteItem,
         removeFavouriteItem:removeFavouriteItem,
         isFavouriteItem:isFavouriteItem

@@ -1,6 +1,6 @@
 import ProductList from "../components/Product/ProductList";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
+
 
 function Product() {
   let [products, setProducts] = useState([]);
@@ -9,24 +9,27 @@ function Product() {
   useEffect(() => {
     setIsDataFetching(true);
     fetch("http://localhost:3002/product")
-      .then((response) => response.json())
-      .then((responseData) => {
+      .then(response => response.json())
+      .then(responseData => {
         setIsDataFetching(false);
         setProducts(responseData.data);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }, []);
 
   if (isDataFetching) {
-    return <div>Data is loading</div>;
+    return <div>
+      Data is loading
+      </div>;
   }
 
-  return (
+  return <section>
     <div>
       with data
       <ProductList products={products} />
     </div>
-  );
+    </section>
+  
 }
 
 export default Product;
