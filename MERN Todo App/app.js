@@ -1,11 +1,19 @@
-const express = require('express');
+const express = require("express");
+const mongoose = require("mongoose");
 
+const todoRouter = require ("./router/ToDoRouter");
 const app = express();
+app.use(express.json());
 
-app.listen(3000, (err)=>{
-    if (err)
- {
-    console.log(err)
- }
-console.log("server connected")
+
+app.use("/", todoRouter);
+
+const uri =
+  "mongodb+srv://myuser:abcd@mycluster.twqc0pp.mongodb.net/toDoApp?retryWrites=true&w=majority&appName=mycluster";
+mongoose.set("strictQuery", false);
+
+
+mongoose.connect(uri).then(() => {
+  app.listen(3000);
+  console.log("Server connected");
 });
