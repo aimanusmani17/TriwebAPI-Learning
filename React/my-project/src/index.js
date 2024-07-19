@@ -7,9 +7,9 @@ import { ContextFavourite } from "./store/ContextFavourite";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-<ContextFavourite>
+<ContextFavourite> 
    <BrowserRouter>
       <App />
     </BrowserRouter>
-   </ContextFavourite>
+    </ContextFavourite>
 );

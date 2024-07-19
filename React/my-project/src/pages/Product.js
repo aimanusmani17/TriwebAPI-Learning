@@ -11,6 +11,7 @@ function Product() {
     fetch("http://localhost:3002/product")
       .then(response => response.json())
       .then(responseData => {
+        console.log(responseData.data);
         setIsDataFetching(false);
         setProducts(responseData.data);
       })
@@ -23,12 +24,12 @@ function Product() {
       </div>;
   }
 
-  return <section>
+  return 
     <div>
       with data
       <ProductList products={products} />
     </div>
-    </section>
+   
   
 }
 

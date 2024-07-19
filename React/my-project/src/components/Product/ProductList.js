@@ -6,11 +6,9 @@ function ProductList(props){
     return <ul className={Styles.list}>
 
     {props.products.map((item) => {
-        // return <li key={item.id}>{item.product_name}</li>;
-        return <ProductItem key={item.id} item={item} />
+        
+        return <ProductItem key={item._id} id={item._id} item={item} />
       })}
-
-       
 
 </ul>
 }

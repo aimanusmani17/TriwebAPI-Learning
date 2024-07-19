@@ -6,25 +6,25 @@ import {useContext} from 'react'
 
 
 function ProductItem(props){
-
+    console.log(props.item)
     const favouriteContext = useContext(FavouriteContext);
-    const isFavourite = favouriteContext.isFavouriteItem(props.item._id)
+    const isFavourite = favouriteContext.isFavouriteItem(props.item._id);
 
 
     const toggleFavourite = () => {
         if (isFavourite){
             favouriteContext.removeFavouriteItem(props.item._id)
-            console.log("removed")
+            
         }else{
             favouriteContext.addFavouriteItem({...props.item});
-            console.log("added")
+
         }
-        }
+    }
     
   return <li key={props.item._id}>
       <CustomWrapper>
         <div className={Styles.image}>
-            <img src={props.item.image} alt="no" />
+            <img src="https://img.freepik.com/free-vector/flat-background-world-tourism-day-celebration_23-2149570029.jpg" alt="no" ></img>
         </div>
         <div className={Styles.content}>
             <h2>{props.item.product_name}</h2>
