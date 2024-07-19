@@ -83,20 +83,22 @@ const getToDo = async (req, res) => {
  };
 
  const deleteToDo = async (req, res) => {
+
     try {
 
-        const id = req.body._id;
+        const id = req.body.id;
    
-    const todo = await ToDo.findById(id);
-    await todo.delete();
+    const todo = await Todo.findById(id);
+    await todo.deleteOne();
        
          res.send({
           status: "success",
           message: "Todo delete successfully",
-          data: todos,
+          
         });
         
        } catch (error) {
+        console.log(error)
     
         res.send({
             status: "error",
@@ -106,8 +108,6 @@ const getToDo = async (req, res) => {
         
       
         }    
-    
-    
- };
+    };
 
 module.exports = { createToDo , getToDo,updateToDo, deleteToDo};
