@@ -1,10 +1,10 @@
-import Style from'./Square.module.css';
+import Style from'./square.module.css';
 
    
     function Square({value, onSquareClick}) {
         return (
         <button
-         className="square"
+         className={Style.square}
           onClick={onSquareClick}>
             {value}
         </button>
