@@ -30,8 +30,7 @@ const Home = () => {
     console.log("user", user);
     return (
     <>
-    <button onClick={()=> navigate("/add-user")}>Add User</button>
-    <button onClick={()=> navigate("/edit-user")}>Edit User</button>
+   
     <div className="header-title">Homepage</div>  
     <br />
     <br />
@@ -62,6 +61,10 @@ const Home = () => {
                     })}
                     </tbody>
         </table>
+        </div>
+        <div className="button-group">  
+            <button className="button" onClick={()=> navigate("/add-user")}>Add User</button>
+        <button  className="button "onClick={()=> navigate("/edit-user")}>Edit User</button>
         </div>
 
         </>
