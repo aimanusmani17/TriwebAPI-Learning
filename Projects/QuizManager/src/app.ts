@@ -6,7 +6,7 @@ import UserRoute from './routes/user';
 
 const app= express();
 
-const connectionString= process.env.CONNECTION_STRING || " ";
+const connectionString= process.env.CONNECTION_STRING || "";
 
 app.use(express.json());
 
@@ -18,7 +18,8 @@ app.get('/', (res,req)=>{
 app.use('/user',UserRoute);
 
 mongoose.connect(connectionString).then(() => {
-    app.listen(process.env.port);
+
+    app.listen(process.env.PORT);
     console.log("Server connected");
   });
 
