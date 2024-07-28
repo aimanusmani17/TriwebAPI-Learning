@@ -1,11 +1,13 @@
 // Redirect request to Particular method on Controller
 import express from 'express';
-import {registerUser, getUser, updateUser, login} from '../controllers/user';
+import {registerUser, login} from '../controllers/auth';
 
 const router = express.Router();
 
-// POST/user/
+// POST/auth/
 router.post('/', registerUser);
 
-// POST/user/login
+// POST/auth/login
 router.post('/login', login);
+
+export default router;

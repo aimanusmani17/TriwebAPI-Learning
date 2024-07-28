@@ -2,9 +2,17 @@ import express from 'express';
 import mongoose from 'mongoose';
 
 import UserRoute from './routes/user';
-
+import authRoute from './routes/auth';
 
 const app= express();
+
+declare global {
+    namespace Express {
+        interface Request{
+            userId:String;
+        }
+    }
+}
 
 const connectionString= process.env.CONNECTION_STRING || "";
 
@@ -17,6 +25,9 @@ app.get('/', (res,req)=>{
 //Redirect / user to userRoute
 app.use('/user',UserRoute);
 
+//Redirect to auth to authroute
+app.use('/auth', authRoute)
+
 mongoose.connect(connectionString).then(() => {
 
     app.listen(process.env.PORT);
@@ -27,16 +38,4 @@ mongoose.connect(connectionString).then(() => {
   
 
 
-// mongoose.connect(connectionString(err)=>{
-//     if(err){
-//         console.log(err);
-//         return;
-//     }
-
-
-// app.listen(3000,()=> {
-//     console.log("Server Connceted");
-// });
-
-// });
 

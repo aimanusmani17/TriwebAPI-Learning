@@ -1,9 +1,9 @@
 // send/ recieve data to/from database via model
 
 import { Request, Response, NextFunction } from "express";
-import bcrypt from "bcryptjs";
+
 import User from "../models/user";
-import jwt from 'jsonwebtoken'
+
 
 interface ReturnResponse {
   status: "success" | "error";

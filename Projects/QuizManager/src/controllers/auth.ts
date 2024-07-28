@@ -1,7 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import bcrypt from "bcryptjs";
 import User from "../models/user";
-import jwt from 'jsonwebtoken'
+import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken';
+
+
+interface ReturnResponse {
+    status: "success" | "error";
+    message: String;
+    data: {};
+  }
 
 
 const registerUser = async (req: Request, res: Response) => {
