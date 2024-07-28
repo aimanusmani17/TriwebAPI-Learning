@@ -23,17 +23,18 @@ const isAuththenticated = (req: Request, res: Response, next: NextFunction) => {
         
     } catch (error) {
        const err = new Error("not authenticated");
-        
+        throw err;
     }
+
     if(!decodeToken){
-        const err = nre Error("not authenticated");
+        const err = new Error("not authenticated");
         throw err;
 
     }   
     //userID
 
    req.userId = decodeToken.userId;
-   console.log(decodeToken);  
+    
    next();
    
     

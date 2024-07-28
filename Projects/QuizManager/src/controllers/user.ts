@@ -15,8 +15,16 @@ interface ReturnResponse {
 
 const getUser = async (req: Request, res: Response) => {
   let resp: ReturnResponse;
+  console.log(req.userId);
   try {
+
     const userId = req.params.userId;
+
+    if(req.userId !=req.params.userId){
+      const err = new Error("function not allowed");
+
+      throw err;
+    }
     const user = await User.findById(userId);
     if (!user) {
       resp = { status: "error", message: "No user found", data: {} };
