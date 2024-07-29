@@ -4,23 +4,19 @@ import { Request, Response, NextFunction } from "express";
 
 import User from "../models/user";
 
-
 interface ReturnResponse {
   status: "success" | "error";
   message: String;
   data: {};
 }
 
-
-
-const getUser = async (req: Request, res: Response) => {
+const getUser = async (req: Request, res: Response, next: NextFunction) => {
   let resp: ReturnResponse;
   console.log(req.userId);
   try {
-
     const userId = req.params.userId;
 
-    if(req.userId !=req.params.userId){
+    if (req.userId != req.params.userId) {
       const err = new Error("function not allowed");
 
       throw err;
@@ -34,13 +30,11 @@ const getUser = async (req: Request, res: Response) => {
       res.status(500).send(resp);
     }
   } catch (error) {
-    console.log(error);
-    resp = { status: "error", message: "Something went wrong", data: {} };
-    res.status(500).send(resp);
+    next(error);
   }
 };
 
-const updateUser = async (req: Request, res: Response) => {
+const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   let resp: ReturnResponse;
   try {
     const userId = req.body._id;
@@ -53,10 +47,8 @@ const updateUser = async (req: Request, res: Response) => {
       res.send(resp);
     }
   } catch (error) {
-    console.log(error);
-    resp = { status: "error", message: "Something went wrong", data: {} };
-    res.status(500).send(resp);
+    next(error);
   }
 };
 
-export {  getUser, updateUser };
+export { getUser, updateUser };
