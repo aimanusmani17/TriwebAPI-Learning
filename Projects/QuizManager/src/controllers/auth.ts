@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import User from "../models/user";
+
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { validationResult } from 'express-validator';
+
+
+import User from "../models/user";
 import ProjectError from '../helper/error';
 
 interface ReturnResponse {
@@ -18,6 +22,16 @@ const registerUser = async (
   let resp: ReturnResponse;
 
   try {
+
+    // Validation
+    const validationError = validationError(req);
+    if(validationError.isEmpty()){
+      const err = new ProjectError("Validation Falied");
+      err.statusCode =422;
+      err.data =  validationError.array();
+      throw err;
+
+    }
     const email = req.body.email;
     const name = req.body.name;
     let password = await bcrypt.hash(req.body.password, 12);
@@ -82,4 +96,14 @@ const login = async (req: Request, res: Response, next:NextFunction) => {
   }
 };
 
-export { registerUser, login };
+const isUserExist = async (email:String) => {
+  
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return false;
+  }
+  return true;
+}
+
+export { registerUser, login, isUserExist };
