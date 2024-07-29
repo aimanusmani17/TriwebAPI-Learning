@@ -38,10 +38,23 @@ const getUser = async (req: Request, res: Response, next: NextFunction) => {
 
 const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   let resp: ReturnResponse;
+
   try {
+
+    if(req.userId != req.body._id){
+      const err = new ProjectError("you are not authorised");
+      err.statusCode = 401;
+      throw err;
+    }
+
     const userId = req.body._id;
     const user = await User.findById(userId);
-    if (user) {
+    if (!user) {
+      if(req.userId !=req.body._id){
+        const err = new ProjectError("you are not authorized");
+        err.statusCode= 401;
+        throw err;
+      }
       user.name = req.body.name;
       await user.save();
 

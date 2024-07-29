@@ -2,11 +2,12 @@ import { Request, Response, NextFunction } from "express";
 import User from "../models/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import ProjectError from '../helper/error';
 
 interface ReturnResponse {
   status: "success" | "error";
   message: String;
-  data: {};
+  data: {} | [];
 }
 
 const registerUser = async (
@@ -50,9 +51,12 @@ const login = async (req: Request, res: Response, next:NextFunction) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      resp = { status: "error", message: "User Doesnt exist", data: {} };
+      const err = new ProjectError("User Doesnt exist");
       res.status(401).send(resp);
-    } else {
+      err.statusCode = 401;
+      throw err;
+
+    } 
       // verify password using bcrypt
       const status = await bcrypt.compare(password, user.password);
       // decide
@@ -60,14 +64,19 @@ const login = async (req: Request, res: Response, next:NextFunction) => {
         const token = jwt.sign({ userId: user._id }, "secretmyverysecretkey", {
           expiresIn: "1h",
         });
+        resp = {status:"Success", message:"Logged in", data:{token}};
+        res.status(401).send(resp);
 
         resp = { status: "success", message: "Logged in", data: { token } };
         res.send(resp);
       } else {
-        resp = { status: "error", message: "Credential mismatched", data: {} };
-        res.status(401).send(resp);
+        
+        const err = new ProjectError("Credential mismatched");
+        err.statusCode = 401;
+        throw err;
+  
       }
-    }
+    
   } catch (error) {
     next(error);
   }
