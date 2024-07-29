@@ -40,7 +40,7 @@ const registerUser = async (
   }
 };
 
-const login = async (req: Request, res: Response) => {
+const login = async (req: Request, res: Response, next:NextFunction) => {
   let resp: ReturnResponse;
   try {
     const email = req.body.email;
