@@ -49,7 +49,7 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 
     const userId = req.body._id;
     const user = await User.findById(userId);
-    if (!user) {
+    if (user) {
       if(req.userId !=req.body._id){
         const err = new ProjectError("you are not authorized");
         err.statusCode= 401;

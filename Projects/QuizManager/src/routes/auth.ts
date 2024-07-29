@@ -22,6 +22,7 @@ router.post("/",[
                     if(status){
                         
                         return Promise.reject("user alreday exist! ");
+                        
                     }
                     
                 })
@@ -30,7 +31,7 @@ router.post("/",[
                 })
         })
         .normalizeEmail()
-] registerUser);
+] ,registerUser);
 
 // POST/auth/login
 router.post("/login", login);

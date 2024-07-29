@@ -22,10 +22,10 @@ const registerUser = async (
   let resp: ReturnResponse;
 
   try {
-
     // Validation
-    const validationError = validationError(req);
-    if(validationError.isEmpty()){
+    const validationError = validationResult(req);
+    console.log(validationError);
+    if(!validationError.isEmpty()){
       const err = new ProjectError("Validation Falied");
       err.statusCode =422;
       err.data =  validationError.array();
@@ -66,6 +66,7 @@ const login = async (req: Request, res: Response, next:NextFunction) => {
 
     if (!user) {
       const err = new ProjectError("User Doesnt exist");
+      resp = { status: "error", message: "user doesnt exist", data: {  } }
       res.status(401).send(resp);
       err.statusCode = 401;
       throw err;
@@ -78,7 +79,7 @@ const login = async (req: Request, res: Response, next:NextFunction) => {
         const token = jwt.sign({ userId: user._id }, "secretmyverysecretkey", {
           expiresIn: "1h",
         });
-        resp = {status:"Success", message:"Logged in", data:{token}};
+        resp = {status:"success", message:"Logged in", data:{token}};
         res.status(401).send(resp);
 
         resp = { status: "success", message: "Logged in", data: { token } };
