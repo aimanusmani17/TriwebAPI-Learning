@@ -30,7 +30,20 @@ router.post("/",[
                     return Promise.reject(err);
                 })
         })
-        .normalizeEmail()
+        .normalizeEmail(),
+        body('password')
+        .trim()
+        .isLenght({min:8})
+        .withMessage("Enter atleast 8 char"),
+        body('confirm_password')
+        .trim()
+        .custom((value, {req})=>{
+            if(value != req.body.password){
+                return Promise.reject("password mismatched ");
+            }
+            return true;
+            
+        })
 ] ,registerUser);
 
 // POST/auth/login
