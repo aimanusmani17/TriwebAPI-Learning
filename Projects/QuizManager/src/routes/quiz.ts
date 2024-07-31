@@ -18,8 +18,8 @@ router.get("/:quizId",isAuththenticated, getQuiz);
 router.put("/",isAuththenticated, updateQuiz);
 
 //Delete
-//DELETE quiz/ quizId
-router.delete("/:quizId",isAuththenticated, deleteQuiz);
+//DELETE quiz/ Publish
+router.delete("/publish",isAuththenticated, deleteQuiz);
 
 //Publish
 //PATCH

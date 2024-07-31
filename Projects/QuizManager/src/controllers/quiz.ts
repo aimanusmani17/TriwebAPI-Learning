@@ -32,10 +32,16 @@ const createQuiz = async (req: Request, res: Response, next: NextFunction) => {
 const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const quizId = req.params.quizId;
-    const quiz = await Quiz.findById(quizId);
+    const quiz = await Quiz.findById(quizId,{name:1,question_list:1,answers:1,created_by:1});
     if(!quiz){
         const err = new ProjectError("Quiz not found");
         err.statusCode = 404;
+        throw err;
+    }
+
+    if(req.userId !== quiz.created_by.toString()){
+        const err = new ProjectError("you are not authorised");
+        err.statusCode = 403;
         throw err;
     }
     const resp: ReturnResponse = {
@@ -47,16 +53,127 @@ const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
-const updateQuiz = (req: Request, res: Response) => {
-  res.send(req.body);
+const updateQuiz = async (req: Request, res: Response, next: NextFunction) => {
+   try {
+    const quizId = req.body._id;
+    const quiz = await Quiz.findById(quizId);
+  
+    if(!quiz){
+      const err = new ProjectError("Quiz not found");
+      err.statusCode = 404;
+      throw err;
+   } 
+   if(req.userId !== quiz.created_by.toString()){
+    const err = new ProjectError("you are not authorised");
+    err.statusCode = 403;
+    throw err;
+}
+
+   if(!quiz){
+    const err = new ProjectError("Quiz not found");
+    err.statusCode = 404;
+    throw err;
+}
+    if(quiz.is_published){
+        const err = new ProjectError("You cannot update publish quiz");
+        err.statusCode = 405;
+        throw err;
+
+    }
+
+     quiz.name = req.body.name;
+     quiz.question_list = req.body.question_list;
+     quiz.answer = req.body.answer;
+
+     await quiz.save();
+
+     const resp: ReturnResponse = {
+        status:"success" ,
+        message: "Quiz updated successfully",
+        data: {}};
+      res.status(200).send(resp);
+     }
+   catch (error) {
+        next(error);
+   }
 };
 
-const deleteQuiz = (req: Request, res: Response) => {
-  res.send(req.params.quizId);
+const deleteQuiz = async (req: Request, res: Response, next: NextFunction) => {
+     try {
+        const quizId= req.params.quizId;
+        const quiz = await Quiz.findById(quizId);
+       
+        if(!quiz){
+            const err = new ProjectError("Quiz not found");
+            err.statusCode = 404;
+            throw err;
+        }
+        console.log(quiz);
+        if(req.userId !== quiz.created_by.toString()){
+            const err = new ProjectError("you are not authorised");
+            err.statusCode = 403;
+            throw err;
+        }
+
+        if (quiz.is_published){
+            const err = new ProjectError("You cannot delete , published quize");
+            err.statusCode =405;
+            throw err;
+        }
+
+
+        await Quiz.deleteOne({_id:quizId});
+        const resp: ReturnResponse = {
+            status:"success" ,
+            message: "Quiz deleted successfully",
+            data: {}};
+          res.status(200).send(resp);
+
+        
+     } catch (error) {
+        next(error);
+     }
 };
 
-const publishQuiz = (req: Request, res: Response) => {
-  res.send(req.body);
+const publishQuiz =async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const quizId = req.body.quizId;
+        const quiz = await Quiz.findById(quizId);
+       
+        if(!quiz){
+            const err = new ProjectError("Quiz not found");
+            err.statusCode = 404;
+            throw err;
+         } 
+
+         if(req.userId !== quiz.created_by.toString()){
+            const err = new ProjectError("you are not authorized");
+            err.statusCode = 403;
+            throw err;
+         }
+
+         if (!!quiz.is_published){
+            const err = new ProjectError("Quiz is already published");
+            err.statusCode =405;
+            throw err;
+         }
+
+        //  if(quiz.is_published === false && quiz.allowedUser.length ===0);
+        //  const err = new ProjectError("Specify user for private");
+        //  err.statusCode = 404;
+        //  throw err;
+
+         quiz.is_published = true;
+
+         await quiz.save();
+         const resp: ReturnResponse = {
+            status:"success" ,
+            message: "Quiz published successfully",
+            data: {}};
+          res.status(200).send(resp);    
+     } catch (error) {
+        next(error);
+     }
 };
 
 export { createQuiz, getQuiz, updateQuiz, deleteQuiz, publishQuiz };

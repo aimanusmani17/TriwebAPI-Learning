@@ -23,7 +23,8 @@ const quizSchema = new schema(
     ],
     answer: {},
         created_by:{
-            type:mongoose.Types.ObjectId
+            type:mongoose.Types.ObjectId,
+            required: true,
         },
         is_published:{
             type:Boolean,
