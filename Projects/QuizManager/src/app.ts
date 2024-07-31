@@ -6,6 +6,8 @@ import UserRoute from "./routes/user";
 import authRoute from "./routes/auth";
 import ProjectError from "./helper/error";
 import quizRoute from "./routes/quiz"
+import examRoute from "./routes/exam"
+
 
 const app = express();
 interface ReturnResponse {
@@ -26,19 +28,20 @@ const connectionString = process.env.CONNECTION_STRING || "";
 
 app.use(express.json());
 
-app.get("/", (res, req) => {
-  // tsc  res.send("hi hello");
+app.get('/', (res, req) => {
+  // tsc  res.send('hi hello');
 });
 
 //Redirect / user to userRoute
-app.use("/user", UserRoute);
+app.use('/user', UserRoute);
 
 //Redirect to auth to authroute
-app.use("/auth", authRoute);
+app.use('/auth', authRoute);
 
 //Redirect /quiz
 app.use('/quiz', quizRoute);
 
+app.use('/exam', examRoute)
 
 app.use(
   (err: ProjectError, req: Request, res: Response, next: NextFunction) => {
@@ -51,7 +54,7 @@ app.use(
       message = err.message;
       statusCode = err.statusCode;
     } else {
-      message = "Something went wrong please try after sometimes!";
+      message = ("Something went wrong please try after sometimes!");
       statusCode = 500;
     }
     let resp: ReturnResponse= { status:"error",message, data:{}}
