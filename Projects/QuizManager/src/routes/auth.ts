@@ -16,9 +16,9 @@ router.post("/",[
         body('email')
         .trim()
         .isEmail()
-        .custom(emailId => {
+        .custom((emailId:String) => {
            return  isUserExist(emailId)
-                .then((status) =>{
+                .then((status:Boolean) =>{
                     if(status){
                         
                         return Promise.reject("user alreday exist! ");
@@ -33,11 +33,11 @@ router.post("/",[
         .normalizeEmail(),
         body('password')
         .trim()
-        .isLenght({min:8})
+        .isLength({min:8})
         .withMessage("Enter atleast 8 char"),
         body('confirm_password')
         .trim()
-        .custom((value, {req})=>{
+        .custom((value:String, {req})=>{
             if(value != req.body.password){
                 return Promise.reject("password mismatched ");
             }
