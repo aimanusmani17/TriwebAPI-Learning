@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import Quiz from "../models/quiz";
-import Result from "../models/result";
+import Report from "../models/report";
 import ProjectError from "../helper/error";
 
 interface ReturnResponse {
@@ -48,7 +48,7 @@ const submitExam = async (req: Request, res: Response, next: NextFunction) => {
     const quiz = await Quiz.findById(quizId, { answer: 1 });
     const answers = quiz?.answer;
 
-    //Chcek result
+    //Chcek Report
     const userId = req.userId;
     const allQuestions = Object.keys(answers);
     const total = allQuestions.length;
@@ -60,8 +60,8 @@ const submitExam = async (req: Request, res: Response, next: NextFunction) => {
             score = score + 1;
         }
 
-    const result = new Result({ userId, quizId, score, total });
-        const data = await result.save();
+    const report = new Report({ userId, quizId, score, total });
+        const data = await report.save();
     //result
     const resp: ReturnResponse = {
         status: "success",
